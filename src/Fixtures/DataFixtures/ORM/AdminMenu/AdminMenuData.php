@@ -12,6 +12,7 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
+ * @author Arkaitz Garro <hola@arkaitzgarro.com>
  */
 
 namespace Elcodi\Fixtures\DataFixtures\ORM\AdminMenu;
@@ -52,6 +53,11 @@ class AdminMenuData extends AbstractFixture
     public function load(ObjectManager $manager)
     {
         /**
+         * @var EntityTranslatorInterface $entityTranslator
+         */
+        $entityTranslator = $this->get('elcodi.entity_translator');
+
+        /**
          * User
          */
 
@@ -63,6 +69,7 @@ class AdminMenuData extends AbstractFixture
 
         $manager->persist($adminUsersNode);
 
+
         $customersNode = $this
             ->createNewNode()
             ->setName('Customers')
@@ -73,13 +80,50 @@ class AdminMenuData extends AbstractFixture
 
         $userNode = $this
             ->createNewNode()
-            ->setName('User')
+            ->setName('Users')
             ->setCode('users')
             ->addSubnode($adminUsersNode)
             ->addSubnode($customersNode)
             ->enable();
 
         $manager->persist($userNode);
+        $manager->flush();
+
+        $entityTranslator->save($userNode, array(
+            'en' => array(
+                'name' => 'Users',
+            ),
+            'es' => array(
+                'name' => 'Usuarios',
+            ),
+            'fr' => array(
+                'name' => 'Utilisateurs',
+            ),
+        ));
+
+        $entityTranslator->save($adminUsersNode, array(
+            'en' => array(
+                'name' => 'Admin users',
+            ),
+            'es' => array(
+                'name' => 'Usuarios admin',
+            ),
+            'fr' => array(
+                'name' => 'Utilisateurs d\'administrateur',
+            ),
+        ));
+
+        $entityTranslator->save($customersNode, array(
+            'en' => array(
+                'name' => 'Customers',
+            ),
+            'es' => array(
+                'name' => 'Clientes',
+            ),
+            'fr' => array(
+                'name' => 'Clientèle',
+            ),
+        ));
 
         /**
          * Catalog
@@ -127,6 +171,67 @@ class AdminMenuData extends AbstractFixture
             ->enable();
 
         $manager->persist($catalogNode);
+        $manager->flush();
+
+        $entityTranslator->save($attributesNode, array(
+            'en' => array(
+                'name' => 'Attribute',
+            ),
+            'es' => array(
+                'name' => 'Características',
+            ),
+            'fr' => array(
+                'name' => 'Attributs',
+            ),
+        ));
+
+        $entityTranslator->save($productsNode, array(
+            'en' => array(
+                'name' => 'Products',
+            ),
+            'es' => array(
+                'name' => 'Productos',
+            ),
+            'fr' => array(
+                'name' => 'Produits',
+            ),
+        ));
+
+        $entityTranslator->save($categoriesNode, array(
+            'en' => array(
+                'name' => 'Categories',
+            ),
+            'es' => array(
+                'name' => 'Categorías',
+            ),
+            'fr' => array(
+                'name' => 'Catégories',
+            ),
+        ));
+
+        $entityTranslator->save($manufacturersNode, array(
+            'en' => array(
+                'name' => 'Manufacturers',
+            ),
+            'es' => array(
+                'name' => 'Fabricantes',
+            ),
+            'fr' => array(
+                'name' => 'Fabricants',
+            ),
+        ));
+
+        $entityTranslator->save($catalogNode, array(
+            'en' => array(
+                'name' => 'Catalog',
+            ),
+            'es' => array(
+                'name' => 'Catálogo',
+            ),
+            'fr' => array(
+                'name' => 'Catalogue',
+            ),
+        ));
 
         /*
          * Purchases
@@ -158,6 +263,43 @@ class AdminMenuData extends AbstractFixture
             ->enable();
 
         $manager->persist($purchasesNode);
+        $manager->flush();
+
+        $entityTranslator->save($cartsNode, array(
+            'en' => array(
+                'name' => 'Carts',
+            ),
+            'es' => array(
+                'name' => 'Carros',
+            ),
+            'fr' => array(
+                'name' => 'Charrette',
+            ),
+        ));
+
+        $entityTranslator->save($ordersNode, array(
+            'en' => array(
+                'name' => 'Orders',
+            ),
+            'es' => array(
+                'name' => 'Pedidos',
+            ),
+            'fr' => array(
+                'name' => 'Ordres',
+            ),
+        ));
+
+        $entityTranslator->save($purchasesNode, array(
+            'en' => array(
+                'name' => 'Purchases',
+            ),
+            'es' => array(
+                'name' => 'Compras',
+            ),
+            'fr' => array(
+                'name' => 'Achats',
+            ),
+        ));
 
         /*
          * Media server
@@ -171,6 +313,19 @@ class AdminMenuData extends AbstractFixture
             ->enable();
 
         $manager->persist($mediasNode);
+        $manager->flush();
+
+        $entityTranslator->save($mediasNode, array(
+            'en' => array(
+                'name' => 'Medias',
+            ),
+            'es' => array(
+                'name' => 'Multimedia',
+            ),
+            'fr' => array(
+                'name' => 'Médias',
+            ),
+        ));
 
         /*
          * Banners
@@ -201,6 +356,43 @@ class AdminMenuData extends AbstractFixture
             ->enable();
 
         $manager->persist($bannersNode);
+        $manager->flush();
+
+        $entityTranslator->save($bannerzonesNode, array(
+            'en' => array(
+                'name' => 'Banner Zones',
+            ),
+            'es' => array(
+                'name' => 'Zonas de banners',
+            ),
+            'fr' => array(
+                'name' => 'Zones banner',
+            ),
+        ));
+
+        $entityTranslator->save($simpleBannersNode, array(
+            'en' => array(
+                'name' => 'Banners',
+            ),
+            'es' => array(
+                'name' => 'Banners',
+            ),
+            'fr' => array(
+                'name' => 'Banners',
+            ),
+        ));
+
+        $entityTranslator->save($bannersNode, array(
+            'en' => array(
+                'name' => 'Banners',
+            ),
+            'es' => array(
+                'name' => 'Banners',
+            ),
+            'fr' => array(
+                'name' => 'Banners',
+            ),
+        ));
 
         /*
          * Coupon
@@ -213,6 +405,19 @@ class AdminMenuData extends AbstractFixture
             ->enable();
 
         $manager->persist($couponsNode);
+        $manager->flush();
+
+        $entityTranslator->save($couponsNode, array(
+            'en' => array(
+                'name' => 'Coupons',
+            ),
+            'es' => array(
+                'name' => 'Cupones',
+            ),
+            'fr' => array(
+                'name' => 'Coupons',
+            ),
+        ));
 
         /*
          * Currencies
@@ -226,6 +431,19 @@ class AdminMenuData extends AbstractFixture
             ->enable();
 
         $manager->persist($currenciesNode);
+        $manager->flush();
+
+        $entityTranslator->save($currenciesNode, array(
+            'en' => array(
+                'name' => 'Currencies',
+            ),
+            'es' => array(
+                'name' => 'Modenas',
+            ),
+            'fr' => array(
+                'name' => 'Devises',
+            ),
+        ));
 
         /*
          * Rules
@@ -256,9 +474,46 @@ class AdminMenuData extends AbstractFixture
             ->enable();
 
         $manager->persist($rulesNode);
+        $manager->flush();
+
+        $entityTranslator->save($ruleGroupsNode, array(
+            'en' => array(
+                'name' => 'Rule Groups',
+            ),
+            'es' => array(
+                'name' => 'Grupos de reglas',
+            ),
+            'fr' => array(
+                'name' => 'Groupes de régles',
+            ),
+        ));
+
+        $entityTranslator->save($simpleRulesNode, array(
+            'en' => array(
+                'name' => 'Rules',
+            ),
+            'es' => array(
+                'name' => 'Reglas',
+            ),
+            'fr' => array(
+                'name' => 'Régles',
+            ),
+        ));
+
+        $entityTranslator->save($rulesNode, array(
+            'en' => array(
+                'name' => 'Rules',
+            ),
+            'es' => array(
+                'name' => 'Reglas',
+            ),
+            'fr' => array(
+                'name' => 'Régles',
+            ),
+        ));
 
         /*
-         * Configuration
+         * Currencies
          */
 
         $configurationNode = $this
@@ -269,18 +524,19 @@ class AdminMenuData extends AbstractFixture
             ->enable();
 
         $manager->persist($configurationNode);
+        $manager->flush();
 
-        /*
-         * Pages
-         */
-
-        $pagesNode = $this
-            ->createNewNode()
-            ->setName('Pages')
-            ->setUrl('admin_page_list')
-            ->enable();
-
-        $manager->persist($pagesNode);
+        $entityTranslator->save($configurationNode, array(
+            'en' => array(
+                'name' => 'Configuration',
+            ),
+            'es' => array(
+                'name' => 'Configuración',
+            ),
+            'fr' => array(
+                'name' => 'Configuration',
+            ),
+        ));
 
         /*
          * Admin side Menu
@@ -305,7 +561,6 @@ class AdminMenuData extends AbstractFixture
             ->addSubnode($currenciesNode)
             ->addSubnode($rulesNode)
             ->addSubnode($configurationNode)
-            ->addSubnode($pagesNode)
             ->enable();
 
         $manager->persist($adminMenu);
